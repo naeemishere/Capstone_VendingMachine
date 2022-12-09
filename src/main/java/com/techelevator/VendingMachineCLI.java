@@ -1,6 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.view.Items;
 import com.techelevator.view.Menu;
+
+import java.util.List;
+
 
 public class VendingMachineCLI {
 
@@ -15,10 +19,15 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
-		while (true) {
+		Items list = new Items();
+		List <String> vendingList = list.displayItems();
+ 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+				for (String str: vendingList) {
+					System.out.println(str);
+				}
 				// display vending machine items
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
