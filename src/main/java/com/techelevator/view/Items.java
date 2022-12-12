@@ -47,20 +47,4 @@ public class Items {
         this.placement = placement;
         this.typeOfItem = typeOfItem;
     }
-
-    public static List <String> displayItems() {
-        String inputFile = "vendingmachine.csv";
-        File file = new File(inputFile);
-        List<String> itemLine = new ArrayList<>();
-        try (Scanner vendingItems = new Scanner(file)) {
-            while (vendingItems.hasNextLine()) {
-                itemLine.add(vendingItems.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        }
-
-	return itemLine;
-
-}
 }
