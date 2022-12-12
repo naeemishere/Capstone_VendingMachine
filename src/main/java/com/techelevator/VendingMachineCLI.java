@@ -6,6 +6,7 @@ import com.techelevator.view.Menu;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public class VendingMachineCLI {
@@ -40,10 +41,11 @@ public class VendingMachineCLI {
 				// display vending machine items
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+
 			}
 		}
 	}
-	Map<String,Items> vendingMachineItems  = new HashMap<>();
+	Map<String,Items> vendingMachineItems  = new TreeMap<>();
 	//made a map to hold the items after the string[] made.
 	//String itemName, String placement, String typeOfItem
 	public void restock(){

@@ -53,24 +53,5 @@ public class Menu {
 		}
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
-
-
 	}
-
-//	public static void displayItems() {
-//		String inputFile = "vendingmachine.csv";
-//		File file = new File(inputFile);
-//		List<String> itemLine = new ArrayList<>();
-//		try (Scanner vendingItems = new Scanner(file)) {
-//			while (vendingItems.hasNextLine()) {
-//				itemLine.add(vendingItems.nextLine() + "\n");
-//			}
-//		} catch (FileNotFoundException e) {
-//			System.out.println("File not found.");
-//		}
-//		for (String str : itemLine) {
-//			System.out.println(str);
-//		}
-////		return itemLine;
-//	}
 }

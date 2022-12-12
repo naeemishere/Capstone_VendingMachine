@@ -37,7 +37,7 @@ public class Items {
     @Override
     public String toString() {
         //String.format("%,.2f", amount));
-        return  "|"+itemName+"|"+ String.format("%.2f",price)+"|"+ typeOfItem;
+        return  "|"+itemName+"|"+ String.format("%.2f",price)+"|"+ typeOfItem+"|Q:"+amountOfItems;
 
     }
 
@@ -59,9 +59,7 @@ public class Items {
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }
-//        for (String str : itemLine) {
-//            System.out.println(str);
-//        }
+
 	return itemLine;
 
 }
