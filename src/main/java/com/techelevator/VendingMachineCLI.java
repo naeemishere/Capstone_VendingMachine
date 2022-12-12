@@ -14,9 +14,10 @@ public class VendingMachineCLI {
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
-	//added a exit option
 	private static final String EXIT_OPTION = "Exit";
+	//Exit and break was put in to stop program
+	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, EXIT_OPTION };
+
 
 
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
@@ -58,6 +59,10 @@ public class VendingMachineCLI {
 				} else if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					// Finish Transaction Window
 				}
+			}
+			else if (choice.equals(EXIT_OPTION)){
+				break;
+				//Exit program placeholder
 			}
 		}
 	}
