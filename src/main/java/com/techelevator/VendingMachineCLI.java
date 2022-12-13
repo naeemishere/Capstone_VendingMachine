@@ -4,10 +4,7 @@ import com.techelevator.view.Items;
 import com.techelevator.view.Menu;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class VendingMachineCLI {
@@ -53,8 +50,21 @@ public class VendingMachineCLI {
 				System.out.println("Current Money Provided: "+ formatter.format(currentMoneyProvided));
 				String purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 				if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+					System.out.println("Please feed in whole dollar amounts up to 20$");
+
+					Scanner input = new Scanner(System.in);
+					currentMoneyProvided += input.nextInt();
+					while(!input.hasNextDouble()){
+						System.out.println("\nPlease put in whole dollar amounts!");
+						input = new Scanner(System.in);
+					}
+
 					// Feed Money Window
 				} else if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+					for (Map.Entry<String,Items> str : vendingMachineItems.entrySet()) {
+						System.out.println(str.getKey()+str.getValue());
+					}
+					//LoggerFile newWindow = new LoggerFile();
 					// Select Product Window
 				} else if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 					// Finish Transaction Window
@@ -74,5 +84,19 @@ public class VendingMachineCLI {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
+	}
+
+	public String whatYouGetWhenYouPur(String placement){
+		String purchaseWords = "";
+		if(placement.startsWith("A")){
+			purchaseWords = "\nCrunch Crunch, Yum!";
+		} else if (placement.startsWith("B")) {
+			purchaseWords = "\nMunch Munch, Yum!";
+		}else if (placement.startsWith("C")){
+			purchaseWords = "\nGlug Glug, Yum!";
+		} else if (placement.startsWith("D")) {
+			purchaseWords = "\nChew Chew, Yum!";
+		}
+		return purchaseWords;
 	}
 }
