@@ -1,7 +1,6 @@
 package com.techelevator;
 
-import com.techelevator.view.Items;
-import com.techelevator.view.Menu;
+import com.techelevator.view.*;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -24,11 +23,14 @@ public class VendingMachineCLI {
 
 	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY,PURCHASE_MENU_OPTION_SELECT_PRODUCT,PURCHASE_MENU_OPTION_FINISH_TRANSACTION };
 
+	private Menu menu;
 	Scanner userInput = new Scanner(System.in);
 
-	LoggerFile vending = new LoggerFile();
+	FeedMoneyOption feedMoneyOption = new FeedMoneyOption();
 
-	private Menu menu;
+
+
+
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -38,8 +40,9 @@ public class VendingMachineCLI {
 
 	public void run() {
 		double currentMoneyProvided= 0;
+		double machineBalance = 0;
 
-
+		Map <String, Items> testMap = SelectProductOption.selectProduct();
 
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
@@ -48,7 +51,7 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-				for (Map.Entry<String,Items> str : vendingMachineItems.entrySet()) {
+				for (Map.Entry<String,Items> str : testMap.entrySet()) {
 					System.out.println(str.getKey()+str.getValue());
 				}
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
@@ -57,7 +60,8 @@ public class VendingMachineCLI {
 				String purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 				if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 					// Feed Money Window
-					currentMoneyProvided = feedMoney(currentMoneyProvided);
+					currentMoneyProvided = feedMoneyOption.feedMoney(currentMoneyProvided);
+					Log.log(" FEED MONEY "+formatter.format(machineBalance+currentMoneyProvided)+" "+formatter.format(currentMoneyProvided+machineBalance));
 					System.out.println("Current Money Provided: "+ formatter.format(currentMoneyProvided));
 					purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
@@ -68,7 +72,7 @@ public class VendingMachineCLI {
 
 						// If user selects Feed Money
 						while(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-							currentMoneyProvided = feedMoney(currentMoneyProvided);
+							currentMoneyProvided = feedMoneyOption.feedMoney(currentMoneyProvided);
 							if(currentMoneyProvided > 20) {
 								System.out.println("Can't insert money more then $20!");
 								currentMoneyProvided = 0;
@@ -85,9 +89,10 @@ public class VendingMachineCLI {
 
 						// If user select Product Window
 						while(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-							for (Map.Entry<String,Items> str : vendingMachineItems.entrySet()) {
+							for (Map.Entry<String,Items> str : testMap.entrySet()) {
 								System.out.println(str.getKey()+str.getValue());
 							}
+
 							System.out.print("Enter Selection Number: ");
 							String option = userInput.nextLine();
 
@@ -98,10 +103,9 @@ public class VendingMachineCLI {
 							}
 
 							// Checking if user selected item exists inside vending machine
-							if(vendingMachineItems.containsKey(option)){
-								System.out.println("It works!");
+							if(testMap.containsKey(option)){
 								// This is Where we need a functionality of subtracting currently provided money and quantity == , dispense()
-								Items vending = vendingMachineItems.get(option);
+								Items vending = testMap.get(option);
 								// Check if user doesn't have enough money to make a purchase
 								int vendingItem = vending.getAmountOfItems() - 1;
 								double itemPrice = vending.getPrice();
@@ -115,6 +119,8 @@ public class VendingMachineCLI {
 
 								// Print specific make noise sound method
 								System.out.println(makeSound(option));
+								String itemName = vending.getItemName();
+								Log.log(" "+itemName+" "+option+" "+formatter.format(itemPrice)+" "+formatter.format(currentMoneyProvided));
 								System.out.println("Remaining Balance: "+ formatter.format(currentMoneyProvided));
 
 							} else {
@@ -127,14 +133,15 @@ public class VendingMachineCLI {
 					// User Selects Finish Transaction (Its own class)
 					if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						// Method to return remaining balance into coins
+						Log.log(" GIVE CHANGE:"+formatter.format(currentMoneyProvided)+" "+formatter.format(machineBalance));
 						balanceToZero(currentMoneyProvided);
+
 						System.out.println("Thank you for making the purchase, Enjoy! :)");
 						continue;
 					}
 
-
 				} else if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-					for (Map.Entry<String,Items> str : vendingMachineItems.entrySet()) {
+					for (Map.Entry<String,Items> str : testMap.entrySet()) {
 						System.out.println(str.getKey()+str.getValue());
 					}
 
@@ -147,7 +154,6 @@ public class VendingMachineCLI {
 			}
 		}
 	}
-	Map<String,Items> vendingMachineItems  = vending.displayItems();
 	//made a map to hold the items after the string[] made.
 	//String itemName, String placement, String typeOfItem
 
@@ -156,22 +162,17 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
-	public static double feedMoney(double currentMoney) {
-		Scanner sc =  new Scanner(System.in);
-		System.out.print("Insert Money ($1s, $5s, or $10s): ");
-		return currentMoney + sc.nextDouble();
-	}
 
 	public String makeSound(String placement){
 		String purchaseWords = "";
 		if(placement.startsWith("A")){
-			purchaseWords = "\nCrunch Crunch, Yum!";
+			return Chips.makeNoise();
 		} else if (placement.startsWith("B")) {
-			purchaseWords = "\nMunch Munch, Yum!";
+			return Candy.makeNoise();
 		}else if (placement.startsWith("C")){
-			purchaseWords = "\nGlug Glug, Yum!";
+			return Soda.makeNoise();
 		} else if (placement.startsWith("D")) {
-			purchaseWords = "\nChew Chew, Yum!";
+			return Gum.makeNoise();
 		}
 		return purchaseWords;
 	}
@@ -184,8 +185,6 @@ public class VendingMachineCLI {
 		int tempAmount2 = tempAmount % 10;
 		int nickles = tempAmount2 / 5;
 		int tempAmount3 = tempAmount2 % 5;
-
 		System.out.println("Return change: Quarters Dispensed: "+quarters+" Dimes Dispensed: "+dimes+" Nickles Dispensed: "+nickles);
 	}
-
 }
