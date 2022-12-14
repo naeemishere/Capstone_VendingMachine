@@ -14,6 +14,14 @@ public class Items {
     private String typeOfItem;
     public int amountOfItems=5;
 
+    public void setAmountOfItems(int amountOfItems) {
+        this.amountOfItems = amountOfItems;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getAmountOfItems() {
         return amountOfItems;
     }
