@@ -39,7 +39,7 @@ public class VendingMachineCLI {
 		int currentMoneyProvided= 0;
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
- 		while (true) {
+		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
