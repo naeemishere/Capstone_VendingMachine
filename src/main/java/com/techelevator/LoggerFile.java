@@ -14,7 +14,6 @@ public class LoggerFile {
         Map<String,Items> itemLine = new TreeMap<>();
         try (Scanner vendingItems = new Scanner(file)) {
             while (vendingItems.hasNextLine()) {
-//                itemLine.put(vendingItems.getKey());
                 String inventory = vendingItems.nextLine();
                 String[] strArray = inventory.split("\\|");
                 String itemSlot = strArray[0];
@@ -22,7 +21,7 @@ public class LoggerFile {
                 double itemPrice = Double.parseDouble(strArray[2]);
                 String itemCategory = strArray[3];
                 int itemQuantity = 5;
-                Items item = new Items(itemPrice, itemName, itemSlot, itemCategory);
+                Items item = new Items(itemPrice, itemName, itemSlot, itemCategory, itemQuantity);
                 itemLine.put(itemSlot, item);
 
             }

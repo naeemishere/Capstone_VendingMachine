@@ -12,7 +12,7 @@ public class Items {
     private String itemName;
     private String placement;
     private String typeOfItem;
-    private int amountOfItems=5;
+    public int amountOfItems=5;
 
     public int getAmountOfItems() {
         return amountOfItems;
@@ -41,7 +41,8 @@ public class Items {
 
     }
 
-    public Items(double price, String itemName, String placement, String typeOfItem) {
+    public Items(double price, String itemName, String placement, String typeOfItem, int quantity) {
+        this.amountOfItems = quantity;
         this.price = price;
         this.itemName = itemName;
         this.placement = placement;
