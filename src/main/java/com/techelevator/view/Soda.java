@@ -6,7 +6,7 @@ public class Soda extends Items {
     }
 
     public static String makeNoise(){
-        return "\nGlug Glug, Yum!";
+        return "Glug Glug, Yum!";
     }
 
 }

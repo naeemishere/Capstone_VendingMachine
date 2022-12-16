@@ -6,7 +6,7 @@ public class Chips extends Items{
     }
 
     public static String makeNoise(){
-        return "\nCrunch Crunch, Yum!";
+        return "Crunch Crunch, Yum!";
     }
 
 }

@@ -15,9 +15,7 @@ public class Menu {
 		this.in = new Scanner(input);
 	}
 
-	public Menu() {
-
-	}
+	public Menu() {}
 
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
@@ -28,7 +26,7 @@ public class Menu {
 		return choice;
 	}
 
-	private Object getChoiceFromUserInput(Object[] options) {
+	public Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
 		try {

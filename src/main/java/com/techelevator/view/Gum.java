@@ -6,7 +6,7 @@ public class Gum extends Items {
     }
 
     public static String makeNoise(){
-        return "\nChew Chew, Yum!";
+        return "Chew Chew, Yum!";
     }
 
 }

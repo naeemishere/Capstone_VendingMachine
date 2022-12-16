@@ -6,6 +6,6 @@ public class Candy extends Items{
     }
 
     public static String makeNoise(){
-        return "\nMunch Munch, Yum!";
+        return "Munch Munch, Yum!";
     }
 }

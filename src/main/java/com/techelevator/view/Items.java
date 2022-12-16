@@ -58,5 +58,19 @@ public class Items {
     }
 
 
+    public static String makeSound(String placement){
+        String purchaseWords = "";
+        if(placement.startsWith("A")){
+            return Chips.makeNoise();
+        } else if (placement.startsWith("B")) {
+            return Candy.makeNoise();
+        }else if (placement.startsWith("C")){
+            return Soda.makeNoise();
+        } else if (placement.startsWith("D")) {
+            return Gum.makeNoise();
+        }
+        return purchaseWords;
+    }
+
 
 }
