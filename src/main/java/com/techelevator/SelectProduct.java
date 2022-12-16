@@ -18,53 +18,50 @@ public class SelectProduct {
 
     public static void SelectProduct(double currentMoneyProvided, String purchaseMenuChoice){
 
-            while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-                for (Map.Entry<String, Items> str : testMap.entrySet()) {
-                    System.out.println(str.getKey() + str.getValue());
-                }
-
-                System.out.print("Enter Selection Number: ");
-                // Here Check if the currently provided money is > 0
-                if (currentMoneyProvided <= 0) {
-                    System.out.println("Balance: $0.00, Enter Money to make a purchase! :)");
-                }
-                Scanner userInput = new Scanner(System.in);
-                String option = userInput.nextLine().toUpperCase();
-
-                // Checking if user selected item exists inside vending machine
-                if (testMap.containsKey(option)) {
-                    // This is Where we need a functionality of subtracting currently provided money and quantity == , dispense()
-
-                    Items vending = testMap.get(option);
-                    int vendingItem = vending.getAmountOfItems();
-                    double itemPrice = vending.getPrice();
-
-                    if(vendingItem == 0) {
-                        System.out.println(option+ " Item SOLD OUT, Make another selection!");
-                        vending.setAmountOfItems(0);
-//                        purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-                    } else {
-                        vendingItem--;
-                        // Check if user doesn't have enough money to make a purchase
-                        if (currentMoneyProvided > itemPrice) {
-                            vending.setAmountOfItems(vendingItem);
-                            currentMoneyProvided = currentMoneyProvided - itemPrice;
-                        } else {
-                            System.out.println("Not enough money to purchase the selected item! Make another Selection or Feed Money!");
-                            break;
-                        }
-
-                        // Print specific make noise sound method
-                        System.out.println(Items.makeSound(option));
-                        String itemName = vending.getItemName();
-                        Log.log(" " + itemName + " " + option + " " + formatter.format(itemPrice) + " " + formatter.format(currentMoneyProvided));
-                        System.out.println("Remaining Balance: " + formatter.format(currentMoneyProvided));
-                    }
-                } else {
-                    System.out.println("Item Not found!");
-                }
-                purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+        while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+            for (Map.Entry<String, Items> str : testMap.entrySet()) {
+                System.out.println(str.getKey() + str.getValue());
             }
+
+            System.out.print("Enter Selection Number: ");
+            // Here Check if the currently provided money is > 0
+            if (currentMoneyProvided <= 0) {
+                System.out.println("Balance: $0.00, Enter Money to make a purchase! :)");
+            }
+            Scanner userInput = new Scanner(System.in);
+            String option = userInput.nextLine().toUpperCase();
+
+            // Checking if user selected item exists inside vending machine
+            if (testMap.containsKey(option)) {
+                // This is Where we need a functionality of subtracting currently provided money and quantity == , dispense()
+                Items vending = testMap.get(option);
+                int vendingItem = vending.getAmountOfItems();
+                double itemPrice = vending.getPrice();
+
+                if(vendingItem == 0) {
+                    System.out.println(option+ " Item SOLD OUT, Make another selection!");
+                    vending.setAmountOfItems(0);
+                } else {
+                    vendingItem--;
+                    // Check if user doesn't have enough money to make a purchase
+                    if (currentMoneyProvided > itemPrice) {
+                        vending.setAmountOfItems(vendingItem);
+                        currentMoneyProvided = currentMoneyProvided - itemPrice;
+                    } else {
+                        System.out.println("Not enough money to purchase the selected item! Make another Selection or Feed Money!");
+                        break;
+                    }
+                    // Print specific make noise sound method
+                    System.out.println(Items.makeSound(option));
+                    String itemName = vending.getItemName();
+                    Log.log(" " + itemName + " " + option + " " + formatter.format(itemPrice) + " " + formatter.format(currentMoneyProvided));
+                    System.out.println("Remaining Balance: " + formatter.format(currentMoneyProvided));
+                }
+            } else {
+                System.out.println("Item Not found!");
+            }
+            purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+        }
         // Finish Transaction
         if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
             // Method to return remaining balance into coins
@@ -73,7 +70,4 @@ public class SelectProduct {
             System.out.println("Thank you for making the purchase, Enjoy! :)");
         }
     }
-
-
-
 }
