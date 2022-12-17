@@ -5,6 +5,7 @@ import com.techelevator.view.Items;
 import java.util.Map;
 import java.util.Scanner;
 
+import static com.techelevator.FeedMoney.FeedMoneyMoreThenOnce;
 import static com.techelevator.VendingMachineCLI.*;
 
 public class SelectProduct {
@@ -50,7 +51,7 @@ public class SelectProduct {
                         System.out.println(Items.makeSound(option));
                     } else {
                         System.out.println("Not enough money to purchase the selected item! Make another Selection or Feed Money!");
-                        purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+//                        purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
                     }
                     // Print specific make noise sound method
                     String itemName = vending.getItemName();
@@ -62,6 +63,12 @@ public class SelectProduct {
             }
             purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
         }
+
+        // Feed More Money
+        if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+            FeedMoneyMoreThenOnce(currentMoneyProvided, purchaseMenuChoice);
+        }
+
         // Finish Transaction
         if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
             // Method to return remaining balance into coins

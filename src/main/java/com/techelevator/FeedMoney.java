@@ -20,7 +20,6 @@ public class FeedMoney {
 
 		if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 
-
 			while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 				currentMoneyProvided = feedMoney(currentMoneyProvided);
 				if (currentMoneyProvided > 20) {
