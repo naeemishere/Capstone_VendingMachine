@@ -47,18 +47,18 @@ public class SelectProduct {
                     if (currentMoneyProvided > itemPrice) {
                         vending.setAmountOfItems(vendingItem);
                         currentMoneyProvided = currentMoneyProvided - itemPrice;
+                        System.out.println(Items.makeSound(option));
                     } else {
                         System.out.println("Not enough money to purchase the selected item! Make another Selection or Feed Money!");
-                        break;
+                        purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
                     }
                     // Print specific make noise sound method
-                    System.out.println(Items.makeSound(option));
                     String itemName = vending.getItemName();
                     Log.log(" " + itemName + " " + option + " " + formatter.format(itemPrice) + " " + formatter.format(currentMoneyProvided));
                     System.out.println("Remaining Balance: " + formatter.format(currentMoneyProvided));
                 }
             } else {
-                System.out.println("Item Not found!");
+                    System.out.println("Item Not found!");
             }
             purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
         }
