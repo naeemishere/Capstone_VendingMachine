@@ -18,21 +18,27 @@ public class FeedMoney {
 
 	public static double FeedMoneyMoreThenOnce(double currentMoneyProvided, String purchaseMenuChoice) {
 
-		while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-			currentMoneyProvided = feedMoney(currentMoneyProvided);
-			if (currentMoneyProvided > 20) {
+		if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 
-				System.out.println("Can't insert money more then $20!");
-				currentMoneyProvided = 0;
-			}
+
+			while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+				currentMoneyProvided = feedMoney(currentMoneyProvided);
+				if (currentMoneyProvided > 20) {
+
+					System.out.println("Can't insert money more then $20!");
+					currentMoneyProvided = 0;
+				}
 				System.out.println("Current Money Provided: " + formatter.format(currentMoneyProvided));
 				purchaseMenuChoice = (String) menu.getChoiceFromOptions(VendingMachineCLI.PURCHASE_MENU_OPTIONS);
 			}
-			if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+
+			if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 				SelectProduct.SelectProduct(currentMoneyProvided, purchaseMenuChoice);
 			}
-		return currentMoneyProvided;
-	}
+		}
+			return currentMoneyProvided;
+		}
+
 	public static void FeedMoneyLog(){
 		Log.log(" FEED MONEY "+formatter.format(machineBalance+currentMoneyProvided)+" "+formatter.format(currentMoneyProvided+machineBalance));
 		System.out.println("Current Money Provided: "+ formatter.format(currentMoneyProvided));
