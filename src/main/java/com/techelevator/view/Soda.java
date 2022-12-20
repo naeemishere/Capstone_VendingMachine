@@ -6,6 +6,7 @@ public class Soda extends Items {
     }
 
     public static String makeNoise(){
+        Items.playMusic("C:\\Users\\psoab\\Desktop\\Merit\\Pair Programming\\module-1-capstone\\Audio\\Drink.wav");
         return "Glug Glug, Yum!";
     }
 

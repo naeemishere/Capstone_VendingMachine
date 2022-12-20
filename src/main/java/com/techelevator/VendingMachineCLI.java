@@ -19,14 +19,13 @@ public class VendingMachineCLI {
 	public static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTION = "Finish Transaction";
 	public static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 	public static Menu menu;
-//	Scanner userInput = new Scanner(System.in);
 	public static double currentMoneyProvided = 0;
 	public static double machineBalance = 0;
 	public static Map<String, Items> testMap = SelectProduct.enterProduct();
 	public static NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
 
-	public void run(VendingMachineCLI vendingMachineCLI) {
+	public void run() {
 
 		while (true) {
 		String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
@@ -43,6 +42,7 @@ public class VendingMachineCLI {
 			if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 			// Feed Money Window
 			currentMoneyProvided = feedMoney(currentMoneyProvided);
+
 			// Log Feed Money
 			FeedMoneyLog();
 			purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
@@ -83,6 +83,6 @@ public class VendingMachineCLI {
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
-		cli.run(cli);
+		cli.run();
 	}
 }

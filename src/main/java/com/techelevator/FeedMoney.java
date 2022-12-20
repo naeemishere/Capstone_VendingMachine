@@ -8,12 +8,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static com.techelevator.VendingMachineCLI.*;
+import static com.techelevator.VendingMachineCLI.currentMoneyProvided;
 
 public class FeedMoney {
 	public static double feedMoney(double currentMoney) {
 		Scanner sc =  new Scanner(System.in);
 		System.out.print("Insert Money ($1s, $5s, or $10s): ");
-		return currentMoney + sc.nextDouble();
+		double fedMoney = currentMoney + sc.nextDouble();
+		return fedMoney;
 	}
 
 	public static double FeedMoneyMoreThenOnce(double currentMoneyProvided, String purchaseMenuChoice) {
@@ -21,7 +23,9 @@ public class FeedMoney {
 		if (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 
 			while (purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+
 				currentMoneyProvided = feedMoney(currentMoneyProvided);
+				Log.log(" FEED MONEY "+formatter.format(currentMoneyProvided)+" "+formatter.format(currentMoneyProvided));
 				if (currentMoneyProvided > 20) {
 
 					System.out.println("Can't insert money more then $20!");
@@ -39,7 +43,9 @@ public class FeedMoney {
 		}
 
 	public static void FeedMoneyLog(){
-		Log.log(" FEED MONEY "+formatter.format(machineBalance+currentMoneyProvided)+" "+formatter.format(currentMoneyProvided+machineBalance));
+		machineBalance = currentMoneyProvided;
+		Log.log("***** NEW TRANSACTION *****");
+		Log.log(" FEED MONEY "+formatter.format(currentMoneyProvided)+" "+formatter.format(currentMoneyProvided));
 		System.out.println("Current Money Provided: "+ formatter.format(currentMoneyProvided));
 	}
 }

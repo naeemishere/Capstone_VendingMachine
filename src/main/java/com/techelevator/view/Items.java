@@ -1,11 +1,12 @@
 package com.techelevator.view;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.InputStream;
 
 public class Items {
     private double price;
@@ -70,6 +71,27 @@ public class Items {
             return Gum.makeNoise();
         }
         return purchaseWords;
+    }
+
+    public static void playMusic(String filePath) {
+
+        try {
+            File musicPath = new File(filePath);
+
+            if(musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            } else {
+                System.out.println("Can't find file");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
     }
 
 

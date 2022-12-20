@@ -49,6 +49,7 @@ public class SelectProduct {
                         vending.setAmountOfItems(vendingItem);
                         currentMoneyProvided = currentMoneyProvided - itemPrice;
                         System.out.println(Items.makeSound(option));
+//                        Items.playMusic("C:\\Users\\psoab\\Desktop\\Merit\\Pair Programming\\module-1-capstone\\Audio\\vendingmachine-104482.wav");
                     } else {
                         System.out.println("Not enough money to purchase the selected item! Make another Selection or Feed Money!");
 //                        purchaseMenuChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
@@ -73,6 +74,9 @@ public class SelectProduct {
         if(purchaseMenuChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
             // Method to return remaining balance into coins
             Log.log(" GIVE CHANGE: "+formatter.format(currentMoneyProvided)+" "+formatter.format(machineBalance));
+            Log.log(" ***********************");
+            Log.log(" End of the transaction!");
+            Log.log(" ***********************");
             ReturnChange.balanceToZero(currentMoneyProvided);
             System.out.println("Thank you for making the purchase, Enjoy! :)");
         }
