@@ -6,7 +6,7 @@ public class Candy extends Items{
     }
 
     public static String makeNoise(){
-        Items.playMusic("C:\\Users\\psoab\\Desktop\\Merit\\Pair Programming\\module-1-capstone\\Audio\\Candy.wav");
+        Items.playMusic("Audio/Candy.wav");
         return "Munch Munch, Yum!";
     }
 }

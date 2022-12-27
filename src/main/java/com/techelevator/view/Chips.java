@@ -11,7 +11,7 @@ public class Chips extends Items{
     }
 
     public static String makeNoise(){
-        Items.playMusic("C:\\Users\\psoab\\Desktop\\Merit\\Pair Programming\\module-1-capstone\\Audio\\Chips.wav");
+        Items.playMusic("Audio/Chips.wav");
         return "Crunch Crunch, Yum!";
     }
 }
